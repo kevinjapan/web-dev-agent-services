@@ -216,7 +216,7 @@ class WedDevAgentServices {
                ?>
                <li>
                   <?php if(has_post_thumbnail()):?>
-                     <img src="<?php the_post_thumbnail_url('small'); ?>"/>
+                     <img src="<?php the_post_thumbnail_url('medium'); ?>"/>
                   <?php endif;?>
                   <h3><?php echo get_the_title();?></h3>
                   <div class="feature_tile_content">
