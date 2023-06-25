@@ -40,8 +40,9 @@ class WedDevAgentServices {
    public function create_service_post_type() {
 
       $labels = array(
-         'name' => __('Services','web-dev-agent'),
-         'singular_name' =>  __('Service','web-dev-agent')
+         'name' => __('WDA Services','web-dev-agent'),
+         'singular_name' =>  __('WDA Service','web-dev-agent'),
+         'menu_name' => 'Services',
       );
       $args = array(
          'labels' => $labels,
