@@ -23,6 +23,7 @@ class WedDevAgentServices {
 
       // assets
       add_action('wp_enqueue_scripts',array($this,'enqueue_assets'));
+      add_action('admin_enqueue_scripts', array($this,'enqueue_admin_assets'));
 
       // 'edit post' page
 		add_action('add_meta_boxes', array( $this,'add_service_meta_box')); 
@@ -68,43 +69,12 @@ class WedDevAgentServices {
    //
    // assets
    //
-   public function enqueue_assets() 
-   {
-      // wp_enqueue_style(
-      //    'wda_outline',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // );  
-      // wp_enqueue_style(
-      //    'wda_outline_layouts',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline-layouts.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // );  
-      // wp_enqueue_style(
-      //    'wda_outline_custom_props',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline-custom-props.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // );  
-      // wp_enqueue_style(
-      //    'wda_outline_utilities',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline-utilities.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // ); 
-      // wp_enqueue_script(
-      //    'web-dev-agent',
-      //    plugin_dir_url( __FILE__ ) . 'js/web-dev-agent.js',
-      //    array('jquery'),
-      //    1,
-      //    true
-      // );
+   public function enqueue_assets() {
+      
+   }
+   public function enqueue_admin_assets() { 
+      wp_register_style('wda_custom_wp_admin_css',plugin_dir_url( __FILE__ ) . 'css/wda-admin-style.css',array(),1,'all'); 
+      wp_enqueue_style( 'wda_custom_wp_admin_css' );
    }
    
 
@@ -136,27 +106,31 @@ class WedDevAgentServices {
 		$tagline = get_post_meta( $post->ID, 'wda_service_tagline', true );
 		$url = get_post_meta( $post->ID, 'wda_service_url', true );
 
-     ?>
-      <div>
-         <label for="wda_service_custom_metabox_tagline">tagline
-         </label>
-         <input
-            type="text"
-            name="wda_service_tagline_field"
-            id="wda_service_tagline_field"
-            value="<?php echo $tagline; ?>"
-         >
-      </div>
-      <div>
-         <label for="wda_service_custom_metabox_url">url
-         </label>
-         <input
-            type="text"
-            name="wda_service_url_field"
-            id="wda_service_url_field"
-            value="<?php echo $url; ?>"
-         >
-      </div>
+      // to do : depr/orig below used this - necessary?
+      // <label for="wda_service_custom_metabox_tagline">tagline
+      // <label for="wda_service_custom_metabox_url">url
+      ?>
+
+      <label class="wda_label">
+         <span class="wda_title">Tagline</span>
+            <input
+               id="wda_service_tagline_field"
+               name="wda_service_tagline_field"
+               class="wda_input"
+               type="text"
+               value="<?php echo $tagline; ?>">
+      </label>
+      <label class="wda_label">
+         <span class="wda_title">URL</span>
+            <input
+               id="wda_service_url_field"
+               name="wda_service_url_field"
+               class="wda_input"
+               type="text"
+               value="<?php echo $url; ?>">
+      </label> 
+
+         
       <?php
    }
 
